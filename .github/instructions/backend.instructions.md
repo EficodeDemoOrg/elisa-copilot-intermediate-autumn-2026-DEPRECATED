@@ -5,7 +5,9 @@ applyTo: "backend/**/*.ts"
 
 # Backend Instructions (`@tsm/backend`)
 
-Express 4 + Lowdb + zod, ESM, Node >= 20.
+## Tech Stack
+
+The backend is a Node.js 20+ ESM service built with Express 4, Lowdb, and Zod.
 
 ## Routes
 
@@ -18,19 +20,10 @@ Express 4 + Lowdb + zod, ESM, Node >= 20.
 ## Data layer
 
 - `db.ts` owns the Lowdb instance and the `DB` type. Don't read or write JSON files directly from routes.
-- All persisted shapes come from `@tsm/shared`; add new fields there first, then to `seed.json` if needed.
-- The dev DB lives at `backend/data/db.json` and is re-seeded from `src/seed.json` when missing. Never edit `db.json` by hand in code changes.
-
-## Analytics
-
-- Pure functions in `src/analytics.ts` operate on plain arrays — keep them framework-free and unit-testable.
-- Route handlers in `routes/analytics.ts` are thin adapters: parse params, load from `db.data`, delegate to analytics functions, return JSON.
-
-## Imports
-
-- ESM with `"type": "module"`. Local imports must use the `.js` extension (`from '../db.js'`), shared package as `from '@tsm/shared'`.
+- Update `seed.json` when a persisted shape needs seeded values.
+- The dev DB is re-seeded from `src/seed.json` when missing.
 
 ## Tests
 
-- Vitest specs go in `backend/test/*.test.ts`. Use `supertest` against the Express app (see existing patterns) rather than starting a real server.
+- Specs go in `backend/test/*.test.ts`. Use `supertest` against the Express app (see existing patterns) rather than starting a real server.
 - After changing analytics or routes, run `npm run test -w backend`. Use `npm run test:coverage -w backend` to check coverage; analyze with `node scripts/analyze-coverage.mjs`.

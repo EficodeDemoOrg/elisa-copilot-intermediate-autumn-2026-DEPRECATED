@@ -5,7 +5,9 @@ applyTo: "frontend/**/*.{ts,tsx}"
 
 # Frontend Instructions (`@tsm/frontend`)
 
-React 18 + Vite + TypeScript, React Router v6, TanStack Query v5.
+## Tech Stack
+
+The frontend is a React 18 and TypeScript application built with Vite, React Router v6, and TanStack Query v5.
 
 ## Data fetching
 
@@ -19,15 +21,6 @@ React 18 + Vite + TypeScript, React Router v6, TanStack Query v5.
 - Components are function components with an explicit return type of `JSX.Element`.
 - Prefer co-located `useState` + `useMemo` for view-local state. No Redux, no Zustand.
 - Styling via classes in `theme.css` (`card`, `stack`, `toolbar`, `subtitle`, etc.). Don't introduce a new CSS framework.
-
-## Types
-
-- Import domain types from `@tsm/shared` (`Skill`, `Engineer`, `CompetencyLevel`, `COMPETENCY_LEVELS`, …). Don't redeclare them locally.
-- Use `Omit<T, 'id'>` for create payloads and `Partial<Omit<T, 'id'>>` for patches, matching the API client.
-
-## Imports
-
-- ESM module resolution: local imports include the `.js` extension (e.g. `from '../api/client.js'`). Shared package is `from '@tsm/shared'`.
 
 ## Tests
 
